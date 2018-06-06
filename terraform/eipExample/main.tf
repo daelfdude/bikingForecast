@@ -1,7 +1,8 @@
 # Specify the provider and access details
 provider "aws" {
-  region = "${var.aws_region}"
-  profile = "terraform"
+  profile                 = "terraform"
+  shared_credentials_file = "~/.aws/credentials"
+  region                  = "${var.aws_region}"
 }
 
 resource "aws_eip" "default" {
