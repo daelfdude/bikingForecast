@@ -18,3 +18,7 @@ terraform/eipExample/\.terraform/
 *.un~
 
 *.swp
+
+terraform/eipExample/terraform\.tfstate
+
+terraform/eipExample/terraform\.tfstate\.backup
