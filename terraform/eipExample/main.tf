@@ -59,8 +59,6 @@ resource "aws_instance" "web" {
   security_groups = ["${aws_security_group.default.name}"]
 
   # We run a remote provisioner on the instance after creating it.
-  # In this case, we just install nginx and start it. By default,
-  # this should be on port 80
   user_data = "${file("userdata.sh")}"
 
   #Instance tags
