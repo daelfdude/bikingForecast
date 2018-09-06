@@ -24,3 +24,11 @@ terraform/eipExample/terraform\.tfstate
 terraform/eipExample/terraform\.tfstate\.backup
 
 terraform/eipExample/\.terraform\.tfstate\.lock\.info
+
+\.classpath
+
+\.project
+
+\.settings/
+
+bin/
