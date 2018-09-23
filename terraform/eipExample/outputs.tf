@@ -1,5 +1,5 @@
 output "address" {
-  value = "${aws_instance.web.private_ip}"
+  value = "${aws_instance.eip.private_ip}"
 }
 
 output "elastic_ip" {

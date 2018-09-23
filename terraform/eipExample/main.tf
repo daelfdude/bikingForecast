@@ -6,7 +6,7 @@ provider "aws" {
 }
 
 resource "aws_eip" "default" {
-  instance = "${aws_instance.web.id}"
+  instance = "${aws_instance.eip.id}"
   vpc      = true
 }
 
@@ -41,7 +41,7 @@ resource "aws_security_group" "default" {
   }
 }
 
-resource "aws_instance" "web" {
+resource "aws_instance" "eip" {
   instance_type = "t2.micro"
 
   # Lookup the correct AMI based on the region
@@ -65,4 +65,12 @@ resource "aws_instance" "web" {
   tags {
     Name = "eip-example"
   }
+}
+
+resource "aws_route53_record" "eip" {
+	zone_id = "Z8F4URHLLB1PO"
+	name = "eip.techlunchcrew.us"
+	type = "A"
+	ttl = "300"
+	records = ["${aws_eip.default.public_ip}"]
 }
