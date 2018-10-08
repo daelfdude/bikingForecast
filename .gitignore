@@ -32,3 +32,9 @@ terraform/eipExample/\.terraform\.tfstate\.lock\.info
 \.settings/
 
 bin/
+
+terraform/dockerExample/\.terraform/
+
+terraform/dockerExample/terraform\.tfstate\.backup
+
+terraform/dockerExample/terraform\.tfstate
