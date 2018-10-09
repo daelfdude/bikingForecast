@@ -38,3 +38,5 @@ terraform/dockerExample/\.terraform/
 terraform/dockerExample/terraform\.tfstate\.backup
 
 terraform/dockerExample/terraform\.tfstate
+
+docker/gradleBuild/Dockerfile

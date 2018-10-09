@@ -1,0 +1,19 @@
+plugins {
+    id 'com.bmuschko.docker-remote-api' version '3.6.2'
+}
+
+import com.bmuschko.gradle.docker.tasks.image.Dockerfile
+import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
+
+task createDockerfile(type: Dockerfile) {
+    destFile = project.file('Dockerfile')
+    from 'openjdk:11-jre'
+    maintainer 'Erik Lumpkin "elfdude@yahoo.com"'
+    defaultCommand 'java', '--version'
+}
+
+task buildImage(type: DockerBuildImage) {
+    dependsOn createDockerfile
+    inputDir = createDockerfile.destFile.parentFile
+    tag = 'gradle-built-image:latest'
+}
