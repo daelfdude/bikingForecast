@@ -1,0 +1,22 @@
+plugins {
+    id 'com.bmuschko.docker-remote-api' version '3.6.2'
+}
+
+import com.bmuschko.gradle.docker.tasks.image.Dockerfile
+import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
+
+task createDockerfile(type: Dockerfile) {
+    destFile = project.file('Dockerfile')
+    from 'openjdk:11-jre'
+    maintainer 'Erik Lumpkin "elfdude@yahoo.com"'
+    addFile 'lib/hello-world-java-0.1-all.jar','/app/lib/hello-world-java-0.1-all.jar'
+    addFile 'scripts/hello-world-java','/app/scripts/hello-world-java'
+    exposePort 8080
+    defaultCommand '/app/scripts/hello-world-java'
+}
+
+task buildImage(type: DockerBuildImage) {
+    dependsOn createDockerfile
+    inputDir = createDockerfile.destFile.parentFile
+    tag = 'micronaut-hello-world:latest'
+}

@@ -40,3 +40,11 @@ terraform/dockerExample/terraform\.tfstate\.backup
 terraform/dockerExample/terraform\.tfstate
 
 docker/gradleBuild/Dockerfile
+
+terraform/dockerExample/\.terraform\.tfstate\.lock\.info
+
+terraform/dockerExample/create\.log
+
+terraform/dockerExample/destroy\.log
+
+docker/micronautExample/micronaut-hello-world\.tar
