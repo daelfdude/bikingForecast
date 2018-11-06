@@ -67,20 +67,30 @@ resource "aws_instance" "docker" {
   }
 
   provisioner "file" {
-    source = "tarball"
-    destination = "tarball"
+    source = "../../docker/micronautExample/micronaut-hello-world.tar"
+    destination = "micronaut-hello-world.tar"
     connection {
 	type = "ssh"
-	user = "ubuntu"
-        private_key = "${file("~/.ssh/terraform.pem")}"
+        user = "ubuntu"
+       private_key = "${file("~/.ssh/terraform.pem")}"
+    }
+  }
+
+  provisioner "file" {
+    source = "./initScript.sh"
+    destination = "initScript.sh"
+    connection {
+	type = "ssh"
+        user = "ubuntu"
+       private_key = "${file("~/.ssh/terraform.pem")}"
     }
   }
 
   provisioner "remote-exec" {
-    inline = ["cat tarball >  /tmp/proof"]
+    inline = ["chmod ugo+x initScript.sh; ./initScript.sh > /tmp/initScript.log"]
     connection {
 	type = "ssh"
-	user = "ubuntu"
+        user = "ubuntu"
         private_key = "${file("~/.ssh/terraform.pem")}"
     }
   }
