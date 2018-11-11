@@ -1,8 +1,14 @@
-apply plugin: 'java'
-apply plugin: 'build-announcements'
+plugins {
+	id 'java'
+	id 'build-announcements'
+}
 
 announce {
 	local = announcerFactory.createAnnouncer('snarl')
+}
+
+repositories {
+	mavenCentral()
 }
 
 sourceSets {
@@ -14,4 +20,15 @@ sourceSets {
   	java      { srcDir 'src/test/java' }
     resources { srcDir 'src/test/java' }
   }
+}
+
+test {
+    useJUnitPlatform()
+}
+
+dependencies {
+	testCompile('org.junit.jupiter:junit-jupiter-api:5.3.1')
+	testCompile('org.junit.jupiter:junit-jupiter-params:5.3.1')
+	testRuntime('org.junit.jupiter:junit-jupiter-engine:5.3.1')
+    testCompile('org.assertj:assertj-core:3.11.1')
 }
