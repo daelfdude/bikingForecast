@@ -1,2 +1,2 @@
 #!/bin/bash
-./gradlew sonarqube -Dsonar.login=$SONARQUBE_TOKEN
+./gradlew check sonarqube -Dsonar.login=$SONARQUBE_TOKEN

@@ -1,7 +1,6 @@
 plugins {
 	id 'build-announcements'
 	id 'org.sonarqube' version '2.6'
-	id 'jacoco'
 }
 
 announce {
@@ -13,6 +12,6 @@ sonarqube {
 		property 'sonar.projectKey', 'daelfdude_bikingForecast'
 		property 'sonar.organization', 'daelfdude-github'
 		property 'sonar.host.url', 'https://sonarcloud.io'
-		property 'sonar.jacoco.reportPaths', "build/jacoco/test.exec"
+		property 'sonar.jacoco.reportPaths', 'backend-server/build/jacoco/test.exec'
 	}
 }
