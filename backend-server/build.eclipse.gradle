@@ -1,0 +1,9 @@
+eclipse {
+	classpath {
+		defaultOutputDir = file('.bin/default')
+		file.whenMerged { cp -> 
+  			cp.entries.findAll { it instanceof org.gradle.plugins.ide.eclipse.model.SourceFolder && it.path.startsWith("src/main/") }*.output = ".bin/main" 
+  			cp.entries.findAll { it instanceof org.gradle.plugins.ide.eclipse.model.SourceFolder && it.path.startsWith("src/test/") }*.output = ".bin/test" 
+		} 
+	}
+}
