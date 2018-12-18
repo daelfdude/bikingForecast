@@ -4,6 +4,7 @@ plugins {
     id "net.ltgt.apt-eclipse" version "0.18"
     id "net.ltgt.apt-idea" version "0.18"	
     id 'jacoco'
+    id 'com.bmuschko.docker-remote-api' version '3.6.2'
 }
 
 apply plugin:"application"
@@ -68,4 +69,22 @@ mainClassName = "com.lumpy.server.Application"
 tasks.withType(JavaCompile){
     options.encoding = "UTF-8"
     options.compilerArgs.add('-parameters')
+}
+
+import com.bmuschko.gradle.docker.tasks.image.Dockerfile
+import com.bmuschko.gradle.docker.tasks.image.DockerBuildImage
+
+task createDockerfile(type: Dockerfile) {
+    destFile = project.file('Dockerfile')
+    from 'openjdk:11-jre'
+    maintainer 'Erik Lumpkin "elfdude@yahoo.com"'
+	runCommand 'apt-get install curl'
+	copyFile 'build/libs/*-all.jar', 'backend-server.jar'
+    defaultCommand 'java', '${JAVA_OPTS}', '-jar', 'backend-server.jar'
+}
+
+task buildImage(type: DockerBuildImage) {
+    dependsOn createDockerfile, assemble
+    inputDir = createDockerfile.destFile.parentFile
+    tag = 'gradle-built-image:latest'
 }
