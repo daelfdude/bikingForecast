@@ -48,3 +48,5 @@ terraform/dockerExample/create\.log
 terraform/dockerExample/destroy\.log
 
 docker/micronautExample/micronaut-hello-world\.tar
+
+backend-server/\.factorypath
