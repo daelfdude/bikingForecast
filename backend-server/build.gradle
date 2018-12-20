@@ -84,5 +84,9 @@ task createDockerfile(type: com.bmuschko.gradle.docker.tasks.image.Dockerfile) {
 task buildImage(type: com.bmuschko.gradle.docker.tasks.image.DockerBuildImage) {
     dependsOn createDockerfile, assemble
     inputDir = createDockerfile.destFile.parentFile
+    inputs.files(createDockerfile.destFile, assemble.outputs)
+    outputs.file("${buildDir}/dockerImage.built")
     tag = 'biking-forecast-backend-server:latest'
+    doLast {
+    	ant.touch(file:"${buildDir}/dockerImage.built")
 }
