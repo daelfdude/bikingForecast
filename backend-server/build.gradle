@@ -90,4 +90,13 @@ task buildImage(type: com.bmuschko.gradle.docker.tasks.image.DockerBuildImage) {
     tag = 'biking-forecast-backend-server:latest'
     doLast {
     	ant.touch(file:"${buildDir}/dockerImage.built")
+    }
+}
+
+task createImageFile(type: com.bmuschko.gradle.docker.tasks.image.DockerSaveImage) {
+	dependsOn buildImage
+	destFile = file('build/dockerImageFile.tar')
+	repository = 'biking-forecast-backend-server'
+	tag = 'latest'
+	useCompression = true
 }
