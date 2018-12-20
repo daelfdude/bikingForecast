@@ -78,7 +78,7 @@ task createDockerfile(type: com.bmuschko.gradle.docker.tasks.image.Dockerfile) {
     maintainer 'Erik Lumpkin "elfdude@yahoo.com"'
 	runCommand 'apt-get install curl'
 	copyFile 'libs/*-all.jar', 'backend-server.jar'
-    defaultCommand 'java', '${JAVA_OPTS}', '-jar', 'backend-server.jar'
+    defaultCommand 'java', '-jar', 'backend-server.jar'
 }
 
 task buildImage(type: com.bmuschko.gradle.docker.tasks.image.DockerBuildImage) {
