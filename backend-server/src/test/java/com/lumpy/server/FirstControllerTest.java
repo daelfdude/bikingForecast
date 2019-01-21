@@ -20,7 +20,7 @@ public class FirstControllerTest {
 		String year = String.valueOf(now.getYear()).substring(2);
 		String day = String.valueOf(now.getDayOfMonth());
 		String min = String.valueOf(now.getMinute());
-		String hour = String.valueOf(now.get(ChronoField.HOUR_OF_AMPM));
+		String hour = String.valueOf(now.get(ChronoField.CLOCK_HOUR_OF_AMPM));
 		assertThat(txt).contains("Hello", month, day, year, hour, min);
 	}
 }
