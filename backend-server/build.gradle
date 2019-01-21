@@ -77,6 +77,7 @@ tasks.withType(JavaCompile){
     options.compilerArgs.add('-parameters')
 }
 
+tasks.assemble.dependsOn check
 
 task createDockerfile(type: com.bmuschko.gradle.docker.tasks.image.Dockerfile) {
     destFile = project.file("${buildDir}/Dockerfile")
