@@ -93,7 +93,7 @@ task buildImage(type: com.bmuschko.gradle.docker.tasks.image.DockerBuildImage) {
     }
 }
 
-task createImageFile(type: com.bmuschko.gradle.docker.tasks.image.DockerSaveImage) {
+task saveImage(type: com.bmuschko.gradle.docker.tasks.image.DockerSaveImage) {
 	dependsOn buildImage
 	destFile = file('build/dockerImageFile.tar')
 	repository = 'biking-forecast-backend-server'
