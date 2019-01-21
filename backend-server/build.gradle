@@ -72,14 +72,16 @@ test {
 }
 
 task integrationTest(type: Test) {
+	outputs.upToDateWhen { false }
+	shouldRunAfter test
+	
+	useJUnitPlatform()
+
 	description = 'Runs integration tests'
 	group = 'verification'
 	
     testClassesDirs = sourceSets.intTest.output.classesDirs
 	classpath = sourceSets.intTest.runtimeClasspath 
-	outputs.upToDateWhen { false }
-	shouldRunAfter test
-	useJUnitPlatform()
 }
 
 check.dependsOn integrationTest
