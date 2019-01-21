@@ -75,9 +75,9 @@ tasks.withType(JavaCompile){
 task createDockerfile(type: com.bmuschko.gradle.docker.tasks.image.Dockerfile) {
     destFile = project.file("${buildDir}/Dockerfile")
     from 'openjdk:11-jre'
-    maintainer 'Erik Lumpkin "elfdude@yahoo.com"'
 	runCommand 'apt-get install curl'
-	copyFile 'libs/*-all.jar', 'backend-server.jar'
+	copyFile 'libs/*jar', 'backend-server.jar'
+	label(['maintainer': 'Erik Lumpkin "elfdude@yahoo.com"', 'biking-forecase-local-dev':'true'])
 	exposePort 8080
     defaultCommand 'java', '-jar', 'backend-server.jar'
 }
