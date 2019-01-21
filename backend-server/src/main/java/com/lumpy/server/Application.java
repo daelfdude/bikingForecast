@@ -11,7 +11,6 @@ public class Application {
 
 	public static void main(String[] args) {
 		ctxt = Micronaut.run(Application.class);
-		ctxt.stop();
 	}
 
 	public static void ensureStopped() {
