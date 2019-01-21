@@ -26,5 +26,5 @@ echo "App logs should show below"
 echo "Ctrl+c to kill and remove container"
 echo ""
 id=`docker run -d -l biking-forecase-local-dev -p 8080:8080 -i -t biking-forecast-backend-server:latest`
-(sleep 5; start "" "http://localhost:8080/first") &
+(sleep 3; start "" "http://localhost:8080/first") &
 docker container attach $id
