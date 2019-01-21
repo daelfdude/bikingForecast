@@ -1,10 +1,5 @@
 plugins {
-	id 'build-announcements'
 	id 'org.sonarqube' version '2.6'
-}
-
-announce {
-	local = announcerFactory.createAnnouncer('snarl')
 }
 
 sonarqube {
