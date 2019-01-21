@@ -28,11 +28,17 @@ sourceSets {
 		java      {srcDir 'src/test/java'}
 		resources {srcDir 'src/test/java'}
 	}
-	integrationTest {
-		runtimeClasspath += test.runtimeClasspath
-		java      {srcDir 'src/integration/java'}
-		resources {srcDir 'src/integration/java'}
+	intTest {
+		compileClasspath += sourceSets.main.output 
+        runtimeClasspath += sourceSets.main.output
+		java      {srcDir 'src/intTest/java'}
+		resources {srcDir 'src/intTest/java'}
 	}
+}
+
+configurations {
+	intTestImplementation.extendsFrom testImplementation
+	intTestRuntime.extendsFrom testRuntimeOnly
 }
 
 dependencies {
@@ -54,30 +60,43 @@ dependencies {
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
     testImplementation 'org.assertj:assertj-core:3.11.1'
-
+    
     testRuntimeOnly "io.micronaut:micronaut-inject-java"
     testRuntimeOnly "org.hamcrest:hamcrest-all:1.3"
     testRuntimeOnly "junit:junit:4.12"
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
+    
 }
 
 test {
     useJUnitPlatform()
 }
 
-shadowJar {
-    mergeServiceFiles()
+task integrationTest(type: Test) {
+	description = 'Runs integration tests'
+	group = 'verification'
+	
+    testClassesDirs = sourceSets.intTest.output.classesDirs
+	classpath = sourceSets.intTest.runtimeClasspath 
+	outputs.upToDateWhen { false }
+	shouldRunAfter test
+	useJUnitPlatform()
 }
+
+check.dependsOn integrationTest
+assemble.dependsOn check
 
 run.jvmArgs('-noverify', '-XX:TieredStopAtLevel=1')
 
 mainClassName = "com.lumpy.server.Application"
-tasks.withType(JavaCompile){
+tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
     options.compilerArgs.add('-parameters')
 }
 
-tasks.assemble.dependsOn check
+shadowJar {
+    mergeServiceFiles()
+}
 
 task createDockerfile(type: com.bmuschko.gradle.docker.tasks.image.Dockerfile) {
     destFile = project.file("${buildDir}/Dockerfile")
