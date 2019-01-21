@@ -9,7 +9,7 @@ import io.micronaut.http.HttpStatus;
 import io.micronaut.http.client.RxHttpClient;
 import io.micronaut.runtime.server.EmbeddedServer;
 
-public class FirstControllerTest {
+public class FirstControllerIntegrationTest {
 
 	@Test
 	public void testIndex() throws Exception {

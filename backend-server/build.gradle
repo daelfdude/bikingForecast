@@ -29,6 +29,10 @@ sourceSets {
 		java      {srcDir 'src/test/java'}
 		resources {srcDir 'src/test/java'}
 	}
+	integrationTest {
+		runtimeClasspath += test.runtimeClasspath
+		java      {srcDir 'src/integration/java'}
+		resources {srcDir 'src/integration/java'}
 }
 
 dependencyManagement {
