@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 echo "------------------------------------------"
 echo "Ctrl+c (or MacOs equiv) to stop"
 echo "App should open in browser tab momentarily"
